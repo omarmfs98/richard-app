@@ -89,24 +89,23 @@ while continue_reading:
             res = requests.post(url='https://ratboy.me/api/findQR',
                                 data=dataEmployee,
                                 headers={'X-Requested-With': 'XMLHttpRequest'
-                                })
+                            })
             js = json.loads(res.text)
-            print res.text
+
             if js['success'] and js['data']['user']:
-                print 'Bienvenido(a): ' + js['data']['user']['first_name']
+                print 'MENSAJE: Bienvenido(a): ' + js['data']['user']['first_name']
 
                 subprocess.call('./takePhoto.sh', shell=True)
                 file = open('/home/pi/Pictures/employee.jpg', 'rb')
-                files = {'photo_employee': file}
-                data = {'employee_id': js['data']['id'],
-                        'date_entry': datetime.datetime.now().time().strftime('%Y-%m-%d %H:%M:%S'
-                        )}
+                files = { 'photo_employee': file }
+                data = { 'employee_id': js['data']['id'] }
+                res = requests.post(url='https://ratboy.me/api/employee_incomes',
+                                    data=data,
+                                    files=files,
+                                    headers={'X-Requested-With': 'XMLHttpRequest'
+                                })
             if not js['success']:
-                print js['message']
-            res = \
-                requests.post(url='https://ratboy.me/api/employee_incomes'
-                              , data=data, files=files,
-                              headers={'X-Requested-With': 'XMLHttpRequest'
-                              })
+                print "MENSAJE: " + js['message']
+
         else:
             print 'Authentication error'
