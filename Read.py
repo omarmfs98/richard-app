@@ -94,16 +94,20 @@ while continue_reading:
 
             if js['success'] and js['data']['user']:
                 print 'MENSAJE: Bienvenido(a): ' + js['data']['user']['first_name']
+                print "Registrando..."
 
                 subprocess.call('./takePhoto.sh', shell=True)
                 file = open('/home/pi/Pictures/employee.jpg', 'rb')
-                files = { 'photo_employee': file }
+                files = {'photo_employee': file}
                 data = { 'employee_id': js['data']['id'] }
                 res = requests.post(url='https://ratboy.me/api/employee_incomes',
                                     data=data,
                                     files=files,
                                     headers={'X-Requested-With': 'XMLHttpRequest'
                                 })
+                js_income = json.loads(res.text)
+                print 'REGISTRO EXITOSO'
+                print 'MENSAJE: Hora de entrada(a): ' + js_income['data']['created_at']
             if not js['success']:
                 print "MENSAJE: " + js['message']
 
