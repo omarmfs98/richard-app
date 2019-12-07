@@ -110,7 +110,7 @@ while continue_reading:
                 print 'Hora de entrada: ' + js_income['data']['created_at']
             if not js['success']:
                 print "[ALERTA]: " + js['message']
-
+            print '\n' + '\n' + 'Por favor pase la tarjeta por el lector'
         else:
             print 'Authentication error'
-    print 'Por favor pase la tarjeta por el lector'
+            print '\n' + '\n' + 'Por favor pase la tarjeta por el lector'
