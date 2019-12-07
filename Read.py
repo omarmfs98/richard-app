@@ -91,7 +91,7 @@ while continue_reading:
                                 headers={'X-Requested-With': 'XMLHttpRequest'
                                 })
             js = json.loads(res.text)
-            if js['data'] != null and js['data']['user']:
+            if js['data'] and js['data']['user']:
                 print 'Bienvenido(a): ' + js['data']['user']['first_name']
 
                 subprocess.call('./takePhoto.sh', shell=True)
