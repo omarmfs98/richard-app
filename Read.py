@@ -117,7 +117,7 @@ while continue_reading:
                     file = open('/home/pi/Pictures/employee.jpg', 'rb')
                     files = {'photo_employee_exit': file}
                     data = { 'employee_id': js['data']['id'] }
-                    res = requests.post(url='https://ratboy.me/api/employee_incomes/' + js_income['id'],
+                    res = requests.post(url='https://ratboy.me/api/employee_incomes/' + js['employee_income_id'],
                                         data=data,
                                         files=files,
                                         headers={'X-Requested-With': 'XMLHttpRequest'
