@@ -93,7 +93,7 @@ while continue_reading:
             js = json.loads(res.text)
 
             if js['success'] and js['data']['user']:
-                print 'MENSAJE: Bienvenido(a): ' + js['data']['user']['first_name']
+                print 'Bienvenido(a): ' + js['data']['user']['first_name']
                 print "Registrando..."
 
                 subprocess.call('./takePhoto.sh', shell=True)
@@ -107,9 +107,10 @@ while continue_reading:
                                 })
                 js_income = json.loads(res.text)
                 print 'REGISTRO EXITOSO'
-                print 'MENSAJE: Hora de entrada(a): ' + js_income['data']['created_at']
+                print 'Hora de entrada: ' + js_income['data']['created_at']
+                print 'Por favor pase la tarjeta por el lector'
             if not js['success']:
-                print "MENSAJE: " + js['message']
+                print "[ALERTA]: " + js['message']
 
         else:
             print 'Authentication error'
