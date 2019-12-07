@@ -94,7 +94,7 @@ while continue_reading:
 
             if js['success']:
                 if not js['data']['finished']:
-                    if not js['data']['date_entry']
+                    if not js['data']['date_entry']:
                         print 'Bienvenido(a): ' + js['data']['user']['first_name']
                         print "Registrando..."
 
@@ -123,7 +123,7 @@ while continue_reading:
                                             files=files,
                                             headers={'X-Requested-With': 'XMLHttpRequest'
                                         })
-                        js_income = json.loads(res.text)                        
+                        js_income = json.loads(res.text)
                         print 'Hora de salida: ' + js_income['data']['created_at']
                 else:
                     print js['message']
