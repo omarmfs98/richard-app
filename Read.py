@@ -91,12 +91,12 @@ while continue_reading:
                                 headers={'X-Requested-With': 'XMLHttpRequest'
                             })
             js = json.loads(res.text)
-                    
+
             if js['success']:
                 print 'Bienvenido(a): ' + js['data']['user']['first_name']
                 print "Registrando..."
 
-                subprocess.call('./takePhoto.sh', shell=True)
+                subprocess.call('/home/pi/richard-app/takePhoto.sh', shell=True)
                 file = open('/home/pi/Pictures/employee.jpg', 'rb')
                 files = {'photo_employee': file}
                 data = { 'employee_id': js['data']['id'] }
