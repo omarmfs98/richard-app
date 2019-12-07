@@ -90,7 +90,8 @@ while continue_reading:
                                 data=dataEmployee,
                                 headers={'X-Requested-With': 'XMLHttpRequest'
                             })
-            
+            js = json.loads(res.text)
+                    
             if js['success']:
                 print 'Bienvenido(a): ' + js['data']['user']['first_name']
                 print "Registrando..."
