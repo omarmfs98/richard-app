@@ -113,4 +113,4 @@ while continue_reading:
 
         else:
             print 'Authentication error'
-    print '\n\n\nPor favor pase la tarjeta por el lector'
+    print '\n' + '\n' + 'Por favor pase la tarjeta por el lector'
