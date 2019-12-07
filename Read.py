@@ -92,16 +92,16 @@ while continue_reading:
                                     headers={'X-Requested-With': 'XMLHttpRequest'
                                     })
                 js = json.loads(res.text)
-                print 'Bienvenido(a): ' + js['data']['user'
-                        ]['first_name']
+                if js['data'] != null && js['data']['user']:
+                    print 'Bienvenido(a): ' + js['data']['user']['first_name']
 
-                subprocess.call('./takePhoto.sh', shell=True)
-                file = open('/home/pi/Pictures/employee.jpg', 'rb')
-                files = {'photo_employee': file}
-                data = {'employee_id': js['data']['id'],
-                        'date_entry': datetime.datetime.now().time().strftime('%Y-%m-%d %H:%M:%S'
-                        )}
-            except requests.exceptions.RequestException, e:
+                    subprocess.call('./takePhoto.sh', shell=True)
+                    file = open('/home/pi/Pictures/employee.jpg', 'rb')
+                    files = {'photo_employee': file}
+                    data = {'employee_id': js['data']['id'],
+                            'date_entry': datetime.datetime.now().time().strftime('%Y-%m-%d %H:%M:%S'
+                            )}
+            except res.exceptions.RequestException, e:
                 print e
             try:
                 res = \
@@ -114,5 +114,3 @@ while continue_reading:
                 print e
         else:
             print 'Authentication error'
-
-			
