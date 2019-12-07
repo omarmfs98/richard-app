@@ -89,8 +89,8 @@ while continue_reading:
             res = requests.post(url='https://ratboy.me/api/findQR',
                                 data=dataEmployee,
                                 headers={'X-Requested-With': 'XMLHttpRequest'
-                            })            
-            print res.text
+                            })
+            
             if js['success']:
                 print 'Bienvenido(a): ' + js['data']['user']['first_name']
                 print "Registrando..."
