@@ -86,23 +86,21 @@ while continue_reading:
             MIFAREReader.MFRC522_StopCrypto1()
             dataEmployee = {'query': str(uid[0]) + str(uid[1]) \
                             + str(uid[2]) + str(uid[3])}
-            try:
-                res = requests.post(url='https://ratboy.me/api/findQR',
-                                    data=dataEmployee,
-                                    headers={'X-Requested-With': 'XMLHttpRequest'
-                                    })
-                js = json.loads(res.text)
-                if js['data'] != null and js['data']['user']:
-                    print 'Bienvenido(a): ' + js['data']['user']['first_name']
+            res = requests.post(url='https://ratboy.me/api/findQR',
+                                data=dataEmployee,
+                                headers={'X-Requested-With': 'XMLHttpRequest'
+                                })
+            js = json.loads(res.text)
+            if js['data'] != null and js['data']['user']:
+                print 'Bienvenido(a): ' + js['data']['user']['first_name']
 
-                    subprocess.call('./takePhoto.sh', shell=True)
-                    file = open('/home/pi/Pictures/employee.jpg', 'rb')
-                    files = {'photo_employee': file}
-                    data = {'employee_id': js['data']['id'],
-                            'date_entry': datetime.datetime.now().time().strftime('%Y-%m-%d %H:%M:%S'
-                            )}
-            except res.exceptions.RequestException, e:
-                print e
+                subprocess.call('./takePhoto.sh', shell=True)
+                file = open('/home/pi/Pictures/employee.jpg', 'rb')
+                files = {'photo_employee': file}
+                data = {'employee_id': js['data']['id'],
+                        'date_entry': datetime.datetime.now().time().strftime('%Y-%m-%d %H:%M:%S'
+                        )}
+            print res.text
             try:
                 res = \
                     requests.post(url='https://ratboy.me/api/employee_incomes'
