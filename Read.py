@@ -110,7 +110,7 @@ while continue_reading:
                         js_income = json.loads(res.text)
                         print 'REGISTRO EXITOSO'
                         print 'Hora de entrada: ' + js_income['data']['created_at']
-                     if not js['data']['date_exit']:
+                    if not js['data']['date_exit']:
                         print 'Hola ' + js['data']['user']['first_name']
                         print "Actualizando fecha de salida..."
 
