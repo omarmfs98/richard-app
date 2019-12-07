@@ -91,7 +91,7 @@ while continue_reading:
                                 headers={'X-Requested-With': 'XMLHttpRequest'
                             })
             js = json.loads(res.text)
-
+            print res.text
             if js['success']:
                 print 'Bienvenido(a): ' + js['data']['user']['first_name']
                 print "Registrando..."
