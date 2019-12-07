@@ -92,7 +92,7 @@ while continue_reading:
                             })
             js = json.loads(res.text)
 
-            if js['success'] and js['data']['user']:
+            if js['success']:
                 print 'Bienvenido(a): ' + js['data']['user']['first_name']
                 print "Registrando..."
 
