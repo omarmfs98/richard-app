@@ -93,39 +93,38 @@ while continue_reading:
             js = json.loads(res.text)
 
             if js['success']:
-                if not js['data']['finished']:
-                    if not js['data']['date_entry']:
-                        print 'Bienvenido(a): ' + js['data']['user']['first_name']
-                        print "Registrando..."
+                if js['data']['code'] == 1:
+                    print 'Bienvenido(a): ' + js['data']['user']['first_name']
+                    print "Registrando..."
 
-                        subprocess.call('/home/pi/richard-app/takePhoto.sh', shell=True)
-                        file = open('/home/pi/Pictures/employee.jpg', 'rb')
-                        files = {'photo_employee': file}
-                        data = { 'employee_id': js['data']['id'] }
-                        res = requests.post(url='https://ratboy.me/api/employee_incomes',
-                                            data=data,
-                                            files=files,
-                                            headers={'X-Requested-With': 'XMLHttpRequest'
-                                        })
-                        js_income = json.loads(res.text)
-                        print 'REGISTRO EXITOSO'
-                        print 'Hora de entrada: ' + js_income['data']['created_at']
-                    if not js['data']['date_exit']:
-                        print 'Hola ' + js['data']['user']['first_name']
-                        print "Actualizando fecha de salida..."
+                    subprocess.call('/home/pi/richard-app/takePhoto.sh', shell=True)
+                    file = open('/home/pi/Pictures/employee.jpg', 'rb')
+                    files = {'photo_employee': file}
+                    data = { 'employee_id': js['data']['id'] }
+                    res = requests.post(url='https://ratboy.me/api/employee_incomes',
+                                        data=data,
+                                        files=files,
+                                        headers={'X-Requested-With': 'XMLHttpRequest'
+                                    })
+                    js_income = json.loads(res.text)
+                    print 'REGISTRO EXITOSO'
+                    print 'Hora de entrada: ' + js_income['data']['created_at']
+                if js['data']['code'] == 2:
+                    print 'Hola ' + js['data']['user']['first_name']
+                    print "Actualizando fecha de salida..."
 
-                        subprocess.call('/home/pi/richard-app/takePhoto.sh', shell=True)
-                        file = open('/home/pi/Pictures/employee.jpg', 'rb')
-                        files = {'photo_employee_exit': file}
-                        data = { 'employee_id': js['data']['id'] }
-                        res = requests.post(url='https://ratboy.me/api/employee_incomes/' + str(js['data']['employee_income_id']),
-                                            data=data,
-                                            files=files,
-                                            headers={'X-Requested-With': 'XMLHttpRequest'
-                                        })
-                        js_income = json.loads(res.text)
-                        print 'Hora de salida: ' + js_income['data']['created_at']
-                else:
+                    subprocess.call('/home/pi/richard-app/takePhoto.sh', shell=True)
+                    file = open('/home/pi/Pictures/employee.jpg', 'rb')
+                    files = {'photo_employee_exit': file}
+                    data = { 'employee_id': js['data']['id'] }
+                    res = requests.post(url='https://ratboy.me/api/employee_incomes/' + str(js['data']['employee_income_id']),
+                                        data=data,
+                                        files=files,
+                                        headers={'X-Requested-With': 'XMLHttpRequest'
+                                    })
+                    js_income = json.loads(res.text)
+                    print 'Hora de salida: ' + js_income['data']['created_at']
+                if js['data']['code'] == 3:
                     print js['message']
             if not js['success']:
                 print "[ALERTA]: " + js['message']
