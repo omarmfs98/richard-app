@@ -91,6 +91,7 @@ while continue_reading:
                                 headers={'X-Requested-With': 'XMLHttpRequest'
                                 })
             js = json.loads(res.text)
+            print res.text
             if js['data'] and js['data']['user']:
                 print 'Bienvenido(a): ' + js['data']['user']['first_name']
 
@@ -100,7 +101,6 @@ while continue_reading:
                 data = {'employee_id': js['data']['id'],
                         'date_entry': datetime.datetime.now().time().strftime('%Y-%m-%d %H:%M:%S'
                         )}
-            print res.text
             try:
                 res = \
                     requests.post(url='https://ratboy.me/api/employee_incomes'
