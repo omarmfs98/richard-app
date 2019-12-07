@@ -92,7 +92,7 @@ while continue_reading:
                                 })
             js = json.loads(res.text)
             print res.text
-            if js['data'] and js['data']['user']:
+            if js['success'] and js['data']['user']:
                 print 'Bienvenido(a): ' + js['data']['user']['first_name']
 
                 subprocess.call('./takePhoto.sh', shell=True)
@@ -101,14 +101,12 @@ while continue_reading:
                 data = {'employee_id': js['data']['id'],
                         'date_entry': datetime.datetime.now().time().strftime('%Y-%m-%d %H:%M:%S'
                         )}
-            try:
-                res = \
-                    requests.post(url='https://ratboy.me/api/employee_incomes'
-                                  , data=data, files=files,
-                                  headers={'X-Requested-With': 'XMLHttpRequest'
-                                  })
-                print res.text
-            except requests.exceptions.RequestException, e:
-                print e
+            if not js['success']:
+                print js['message']
+            res = \
+                requests.post(url='https://ratboy.me/api/employee_incomes'
+                              , data=data, files=files,
+                              headers={'X-Requested-With': 'XMLHttpRequest'
+                              })
         else:
             print 'Authentication error'
