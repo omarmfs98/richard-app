@@ -108,9 +108,9 @@ while continue_reading:
                 js_income = json.loads(res.text)
                 print 'REGISTRO EXITOSO'
                 print 'Hora de entrada: ' + js_income['data']['created_at']
-                print 'Por favor pase la tarjeta por el lector'
             if not js['success']:
                 print "[ALERTA]: " + js['message']
-
+                
+            print 'Por favor pase la tarjeta por el lector'
         else:
             print 'Authentication error'
