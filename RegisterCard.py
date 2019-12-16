@@ -77,7 +77,7 @@ while continue_reading:
                 if js['errors']:
                   print "[ALERTA]: " + js['errors']['serial'][0]
             except:
-                print "Excepción"
+                print "Excepcion"
             print '\n' + '\n' + 'Por favor pase la tarjeta por el lector'
         else:
             print "Authentication error"
