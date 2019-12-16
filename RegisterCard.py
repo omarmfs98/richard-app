@@ -13,9 +13,7 @@ import sys
 
 continue_reading = True
 GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(3, GPIO.IN)
-
+count = 0
 # Capture SIGINT for cleanup when the script is aborted
 
 def end_read(signal, frame):
@@ -31,7 +29,7 @@ signal.signal(signal.SIGINT, end_read)
 # Create an object of the class MFRC522
 
 MIFAREReader = MFRC522.MFRC522()
-count = 0
+
 # Welcome message
 
 print '[MODO REGISTRO DE TARJETA]'
@@ -105,5 +103,5 @@ while continue_reading:
             print "[ALERTA]: " + js['message']
             print '\n' + '\n' + 'Por favor pase la tarjeta por el lector'
         else:
-            print 'Authentication error'            
+            print 'Authentication error'
             print '\n' + '\n' + 'Por favor pase la tarjeta por el lector'
