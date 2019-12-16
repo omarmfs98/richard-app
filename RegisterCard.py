@@ -31,7 +31,7 @@ signal.signal(signal.SIGINT, end_read)
 # Create an object of the class MFRC522
 
 MIFAREReader = MFRC522.MFRC522()
-
+count = 0
 # Welcome message
 
 print '[MODO REGISTRO DE TARJETA]'
@@ -43,8 +43,10 @@ while continue_reading:
     input_state = GPIO.input(3)
     if input_state == False:
         end_read
-        subprocess.Popen(['python', 'Read.py'])
-        sys.exit()
+        if count == 0:
+            subprocess.Popen(['python', 'Read.py'])
+            count++
+            sys.exit()
     # Scan for cards
 
     (status, TagType) = \

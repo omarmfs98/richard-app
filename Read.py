@@ -15,7 +15,7 @@ continue_reading = True
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(3, GPIO.IN)
-
+count = 0
 # Capture SIGINT for cleanup when the script is aborted
 
 def end_read(signal, frame):
@@ -42,9 +42,11 @@ print 'Por favor pase la tarjeta por el lector'
 while continue_reading:
     input_state = GPIO.input(3)
     if input_state == False:
-        end_read        
-        subprocess.Popen(['python', 'RegisterCard.py'])
-        sys.exit()
+        end_read
+        if count == 0:
+            subprocess.Popen(['python', 'RegisterCard.py'])
+            count++
+            sys.exit()
 	# Scan for cards
 	(status, TagType) = \
 	      MIFAREReader.MFRC522_Request(MIFAREReader.PICC_REQIDL)
