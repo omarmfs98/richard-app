@@ -14,7 +14,7 @@ import sys
 continue_reading = True
 
 GPIO.setmode(GPIO.BOARD)
-GPIO.setup(3, GPIO.IN, pull_up_down = GPIO.PUD_UP)
+GPIO.setup(3, GPIO.IN)
 
 # Capture SIGINT for cleanup when the script is aborted
 
