@@ -103,9 +103,7 @@ while continue_reading:
             js = json.loads(res.text)
 
             print "[ALERTA]: " + js['message']
-            print '[MODO REGISTRO DE TARJETA]'
             print '\n' + '\n' + 'Por favor pase la tarjeta por el lector'
         else:
-            print 'Authentication error'
-            print '[MODO REGISTRO DE TARJETA]'
+            print 'Authentication error'            
             print '\n' + '\n' + 'Por favor pase la tarjeta por el lector'

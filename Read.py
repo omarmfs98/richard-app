@@ -136,7 +136,7 @@ while continue_reading:
 		                    print js['message']
 		            else:
 		                print "[ALERTA]: " + js['message']
-		            print '[MODO LECTURA] \n' + '\n' + 'Por favor pase la tarjeta por el lector'
+		            print '\n' + '\n' + 'Por favor pase la tarjeta por el lector'
 		        else:
 		            print 'Authentication error'
-		            print '[MODO LECTURA] \n' + '\n' + 'Por favor pase la tarjeta por el lector'
+		            print '\n' + '\n' + 'Por favor pase la tarjeta por el lector'
