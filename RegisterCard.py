@@ -64,14 +64,13 @@ while continue_reading:
         # Check if authenticated
         if status == MIFAREReader.MI_OK:
             MIFAREReader.MFRC522_Read(8)
-            MIFAREReader.MFRC522_StopCrypto1()
-            print str(uid[0]) + str(uid[1]) + str(uid[2]) + str(uid[3])
+            MIFAREReader.MFRC522_StopCrypto1()            
             dataEmployee = {'serial': str(uid[0]) + str(uid[1]) + str(uid[2]) + str(uid[3])}
             res = requests.post(url='https://ratboy.me/api/rfidCodes',
                                 data=dataEmployee,
                                 headers={'X-Requested-With': 'XMLHttpRequest'
                             })
-            js = json.loads(res.text)            
+            js = json.loads(res.text)
             print "[ALERTA]: " + js['errors']['serial'][0]
             print '\n' + '\n' + 'Por favor pase la tarjeta por el lector'
         else:
