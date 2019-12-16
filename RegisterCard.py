@@ -74,10 +74,13 @@ while continue_reading:
             try:
                 if js['success']:
                   print "Tarjeta registrada correctamente"
+            except:
+                print ""
+            try:
                 if js['errors']:
                   print "[ALERTA]: " + js['errors']['serial'][0]
             except:
-                print "Excepcion"
+                print ""
             print '\n' + '\n' + 'Por favor pase la tarjeta por el lector'
         else:
             print "Authentication error"
