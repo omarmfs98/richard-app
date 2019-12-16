@@ -44,6 +44,7 @@ while continue_reading:
     if input_state == False:
         time.sleep(0.3)
         subprocess.Popen(['python', 'Read.py'])
+        GPIO.cleanup() 
         sys.exit()
 	# Scan for cards
 	(status, TagType) = \
