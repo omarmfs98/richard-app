@@ -72,12 +72,12 @@ while continue_reading:
                             })
             js = json.loads(res.text)
             try:
-              if js['success']:
+                if js['success']:
                   print "Tarjeta registrada correctamente"
-              if js['errors']:
+                if js['errors']:
                   print "[ALERTA]: " + js['errors']['serial'][0]
             except:
-              print "Excepción"
+                print "Excepción"
             print '\n' + '\n' + 'Por favor pase la tarjeta por el lector'
         else:
             print "Authentication error"
