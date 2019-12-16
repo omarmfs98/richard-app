@@ -14,8 +14,7 @@ import sys
 continue_reading = True
 
 GPIO.setmode(GPIO.BOARD)
-GPIO.setwarning(False)
-GPIO.setup(24, GPIO.IN, pull_up_down = GPIO.PUD_UP)
+GPIO.setup(3, GPIO.IN, pull_up_down = GPIO.PUD_UP)
 
 # Capture SIGINT for cleanup when the script is aborted
 
@@ -40,7 +39,7 @@ print 'Por favor pase la tarjeta por el lector'
 # This loop keeps checking for chips. If one is near it will get the UID and authenticate
 
 while continue_reading:
-    input_state = GPIO.input(24)
+    input_state = GPIO.input(3)
     if input_state == False:
         time.sleep(0.3)
         subprocess.Popen(['python', 'RegisterCard.py'])
