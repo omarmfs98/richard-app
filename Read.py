@@ -133,7 +133,7 @@ while continue_reading:
 		                if js['data']['code'] == 3:
 		                    print js['message']
 		            else:
-		                print "[ALERTA]: " + js['message']
+		                print "[ALERTA lectura]: " + js['message']
 		            print '\n' + '\n' + 'Por favor pase la tarjeta por el lector'
 		        else:
 		            print 'Authentication error'
