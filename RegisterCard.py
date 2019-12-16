@@ -7,6 +7,7 @@ import json
 import datetime
 import time
 import sys
+import os
 
 continue_reading = True
 count = 0
@@ -33,7 +34,7 @@ while continue_reading:
     if input_state == False:
         end_read
         if count == 0:
-            subprocess.Popen(['python', 'Read.py'])
+            os.system('lxterminal -e /usr/bin/python /home/pi/richard-app/Read.py')
             ++count
             sys.exit()
     # Scan for cards
