@@ -13,7 +13,6 @@ import sys
 
 continue_reading = True
 GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BOARD)
 GPIO.setup(3, GPIO.IN)
 count = 0
 # Capture SIGINT for cleanup when the script is aborted
