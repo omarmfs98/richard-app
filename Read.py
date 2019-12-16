@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 import RPi.GPIO as GPIO
 import MFRC522
@@ -8,13 +9,8 @@ import requests
 import json
 import datetime
 
-
 continue_reading = True
 
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(24, GPIO.IN, pull_up_down = GPIO.PUD_UP)
-
-reading = True
 
 # Capture SIGINT for cleanup when the script is aborted
 
@@ -39,111 +35,97 @@ print 'Por favor pase la tarjeta por el lector'
 # This loop keeps checking for chips. If one is near it will get the UID and authenticate
 
 while continue_reading:
-    input_state = GPIO.input(24)
-    if input_state == False:
-        reading = not reading
 
-	# Scan for cards
-	(status, TagType) = \
-	      MIFAREReader.MFRC522_Request(MIFAREReader.PICC_REQIDL)
-	# If a card is found
-	if status == MIFAREReader.MI_OK:
-		print 'Card detected'
-		# Get the UID of the card
-
-		(status, uid) = MIFAREReader.MFRC522_Anticoll()
-
-		# If we have the UID, continue
-
+		# Scan for cards
+		(status, TagType) = \
+		MIFAREReader.MFRC522_Request(MIFAREReader.PICC_REQIDL)
+		# If a card is found
 		if status == MIFAREReader.MI_OK:
+			print 'Card detected'
+			# Get the UID of the card
 
-			# Print UID
+			(status, uid) = MIFAREReader.MFRC522_Anticoll()
 
-		        print 'Card read UID: %s,%s,%s,%s' % (uid[0], uid[1], uid[2],
-		                uid[3])
+			# If we have the UID, continue
 
-		        # This is the default key for authentication
+			if status == MIFAREReader.MI_OK:
 
-		        key = [
-		            0xFF,
-		            0xFF,
-		            0xFF,
-		            0xFF,
-		            0xFF,
-		            0xFF,
-		            ]
+				# Print UID
 
-		        # Select the scanned tag
+			        print 'Card read UID: %s,%s,%s,%s' % (uid[0], uid[1], uid[2],
+			                uid[3])
 
-		        MIFAREReader.MFRC522_SelectTag(uid)
+			        # This is the default key for authentication
 
-		        # Authenticate
+			        key = [
+			            0xFF,
+			            0xFF,
+			            0xFF,
+			            0xFF,
+			            0xFF,
+			            0xFF,
+			            ]
 
-		        status = MIFAREReader.MFRC522_Auth(MIFAREReader.PICC_AUTHENT1A,
-		                8, key, uid)
+			        # Select the scanned tag
 
-		        # Check if authenticated
-                if status == MIFAREReader.MI_OK:
-                    MIFAREReader.MFRC522_Read(8)
-                    MIFAREReader.MFRC522_StopCrypto1()
-                    if reading:
-                        print "[MODO LECTURA]"
-                        dataEmployee = {'query': str(uid[0]) + str(uid[1]) \
-                                        + str(uid[2]) + str(uid[3])}
-                        res = requests.post(url='https://ratboy.me/api/findQR',
-                                            data=dataEmployee,
-                                            headers={'X-Requested-With': 'XMLHttpRequest'
-                                        })
-                        js = json.loads(res.text)
+			        MIFAREReader.MFRC522_SelectTag(uid)
 
-                        if js['success']:
-                            if js['data']['code'] == 1:
-                                print 'Bienvenido(a): ' + js['data']['user']['first_name']
-                                print "Registrando..."
+			        # Authenticate
 
-                                subprocess.call('/home/pi/richard-app/takePhoto.sh', shell=True)
-                                file = open('/home/pi/Pictures/employee.jpg', 'rb')
-                                files = {'photo_employee': file}
-                                data = { 'employee_id': js['data']['id'] }
-                                res = requests.post(url='https://ratboy.me/api/employee_incomes',
-                                                    data=data,
-                                                    files=files,
-                                                    headers={'X-Requested-With': 'XMLHttpRequest'
-                                                })
-                                js_income = json.loads(res.text)
-                                print 'REGISTRO EXITOSO'
-                                print 'Hora de entrada: ' + js_income['data']['created_at']
-                            if js['data']['code'] == 2:
-                                print 'Hola ' + js['data']['user']['first_name']
-                                print "Actualizando fecha de salida..."
+			        status = MIFAREReader.MFRC522_Auth(MIFAREReader.PICC_AUTHENT1A,
+			                8, key, uid)
 
-                                subprocess.call('/home/pi/richard-app/takePhoto.sh', shell=True)
-                                file = open('/home/pi/Pictures/employee.jpg', 'rb')
-                                files = {'photo_employee_exit': file}
-                                data = { 'employee_id': js['data']['id'] }
-                                res = requests.post(url='https://ratboy.me/api/employee_incomes/' + str(js['data']['employee_income_id']),
-                                                    data=data,
-                                                    files=files,
-                                                    headers={'X-Requested-With': 'XMLHttpRequest'
-                                                })
-                                js_income = json.loads(res.text)
-                                print 'Hora de salida: ' + js_income['data']['created_at']
-                                print 'Nos vemos en el siguiente dia!'
-                            if js['data']['code'] == 3:
-                                print js['message']
-                        else:
-                            print "[ALERTA]: " + js['message']
-                    else:
-                        print "[MODO REGISTRO TARJETA]"
-                        dataEmployee = {'serial': str(uid[0]) + str(uid[1]) + str(uid[2]) + str(uid[3])}
-                        res = requests.post(url='https://ratboy.me/api/rfidCodes',
-                                            data=dataEmployee,
-                                            headers={'X-Requested-With': 'XMLHttpRequest'
-                                        })
-                        js = json.loads(res.text)
+			        # Check if authenticated
 
-                        print "[ALERTA]: " + js['message']
-                    print '\n' + '\n' + 'Por favor pase la tarjeta por el lector'
-                else:
-                    print 'Authentication error'
-                    print '\n' + '\n' + 'Por favor pase la tarjeta por el lector'
+			        if status == MIFAREReader.MI_OK:
+			            MIFAREReader.MFRC522_Read(8)
+			            MIFAREReader.MFRC522_StopCrypto1()
+			            dataEmployee = {'query': str(uid[0]) + str(uid[1]) \
+			                            + str(uid[2]) + str(uid[3])}
+			            res = requests.post(url='https://ratboy.me/api/findQR',
+			                                data=dataEmployee,
+			                                headers={'X-Requested-With': 'XMLHttpRequest'
+			                            })
+			            js = json.loads(res.text)
+
+			            if js['success']:
+			                if js['data']['code'] == 1:
+			                    print 'Bienvenido(a): ' + js['data']['user']['first_name']
+			                    print "Registrando..."
+
+			                    subprocess.call('/home/pi/richard-app/takePhoto.sh', shell=True)
+			                    file = open('/home/pi/Pictures/employee.jpg', 'rb')
+			                    files = {'photo_employee': file}
+			                    data = { 'employee_id': js['data']['id'] }
+			                    res = requests.post(url='https://ratboy.me/api/employee_incomes',
+			                                        data=data,
+			                                        files=files,
+			                                        headers={'X-Requested-With': 'XMLHttpRequest'
+			                                    })
+			                    js_income = json.loads(res.text)
+			                    print 'REGISTRO EXITOSO'
+			                    print 'Hora de entrada: ' + js_income['data']['created_at']
+			                if js['data']['code'] == 2:
+			                    print 'Hola ' + js['data']['user']['first_name']
+			                    print "Actualizando fecha de salida..."
+
+			                    subprocess.call('/home/pi/richard-app/takePhoto.sh', shell=True)
+			                    file = open('/home/pi/Pictures/employee.jpg', 'rb')
+			                    files = {'photo_employee_exit': file}
+			                    data = { 'employee_id': js['data']['id'] }
+			                    res = requests.post(url='https://ratboy.me/api/employee_incomes/' + str(js['data']['employee_income_id']),
+			                                        data=data,
+			                                        files=files,
+			                                        headers={'X-Requested-With': 'XMLHttpRequest'
+			                                    })
+			                    js_income = json.loads(res.text)
+			                    print 'Hora de salida: ' + js_income['data']['created_at']
+			                    print 'Nos vemos mañana!'
+			                if js['data']['code'] == 3:
+			                    print js['message']
+			            else:
+			                print "[ALERTA]: " + js['message']
+			            print '\n' + '\n' + 'Por favor pase la tarjeta por el lector'
+			        else:
+			            print 'Authentication error'
+			            print '\n' + '\n' + 'Por favor pase la tarjeta por el lector'
