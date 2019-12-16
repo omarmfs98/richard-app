@@ -13,7 +13,6 @@ import sys
 
 continue_reading = True
 
-GPIO.cleanup()
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(3, GPIO.IN)
 
@@ -45,7 +44,7 @@ while continue_reading:
     if input_state == False:
         time.sleep(0.3)
         subprocess.Popen(['python', 'Read.py'])
-        GPIO.cleanup()
+        end_read
         sys.exit()
     # Scan for cards
 
