@@ -71,10 +71,13 @@ while continue_reading:
                                 headers={'X-Requested-With': 'XMLHttpRequest'
                             })
             js = json.loads(res.text)
-            if js['success']:
-                print "Tarjeta registrada correctamente"
-            else:
-                print "[ALERTA]: " + js['errors']['serial'][0]
+            try:
+              if js['success']:
+                  print "Tarjeta registrada correctamente"
+              if js['errors']:
+                  print "[ALERTA]: " + js['errors']['serial'][0]
+            except:
+              print "Excepción"
             print '\n' + '\n' + 'Por favor pase la tarjeta por el lector'
         else:
             print "Authentication error"
