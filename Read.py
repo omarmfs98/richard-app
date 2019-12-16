@@ -61,7 +61,8 @@ while continue_reading:
 
 			# Print UID
 
-            print 'Card read UID: %s,%s,%s,%s' % (uid[0], uid[1], uid[2], uid[3])
+	        print 'Card read UID: %s,%s,%s,%s' % (uid[0], uid[1], uid[2],
+	                uid[3])
 
 	        # This is the default key for authentication
 
@@ -80,13 +81,14 @@ while continue_reading:
 
 	        # Authenticate
 
-	        status = MIFAREReader.MFRC522_Auth(MIFAREReader.PICC_AUTHENT1A, 8, key, uid)
+	        status = MIFAREReader.MFRC522_Auth(MIFAREReader.PICC_AUTHENT1A,
+	                8, key, uid)
 
 	        # Check if authenticated
 
 	        if status == MIFAREReader.MI_OK:
 	            MIFAREReader.MFRC522_Read(8)
-	            MIFAREReader.MFRC522_StopCrypto1()
+	            MIFAREReader.MFRC522_StopCrypto1()                                
 
 	            dataEmployee = {'query': str(uid[0]) + str(uid[1]) \
 	                            + str(uid[2]) + str(uid[3])}
