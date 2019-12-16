@@ -19,10 +19,10 @@ def end_read(signal,frame):
 
 # Hook the SIGINT
 signal.signal(signal.SIGINT, end_read)
-
+GPIO.setwarnings(False)
 # Create an object of the class MFRC522
 MIFAREReader = MFRC522.MFRC522()
-GPIO.setwarnings(False)
+
 # Welcome message
 print '[MODO LECTURA]'
 print 'Por favor pase la tarjeta por el lector'
