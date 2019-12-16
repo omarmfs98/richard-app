@@ -45,7 +45,7 @@ while continue_reading:
         end_read
         if count == 0:
             subprocess.Popen(['python', 'RegisterCard.py'])
-            count++
+            ++count
             sys.exit()
 	# Scan for cards
 	(status, TagType) = \
