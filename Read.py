@@ -105,7 +105,7 @@ while continue_reading:
                                     })
                     js_income = json.loads(res.text)
                     print 'Hora de salida: ' + js_income['data']['created_at']
-                    print 'Nos vemos mañana!'
+                    print 'Nos vemos el siguiente dia!'
                 if js['data']['code'] == 3:
                     print js['message']
             else:
