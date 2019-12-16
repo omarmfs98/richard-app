@@ -43,7 +43,7 @@ while continue_reading:
     input_state = GPIO.input(3)
     if input_state == False:
         time.sleep(0.3)
-        subprocess.Popen(['python', 'RegisterCard.py'])
+        subprocess.Popen(['python', 'Read.py'])
         sys.exit()
 	# Scan for cards
 	(status, TagType) = \
