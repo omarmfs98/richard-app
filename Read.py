@@ -41,8 +41,8 @@ print 'Por favor pase la tarjeta por el lector'
 while continue_reading:
         input_state = GPIO.input(24)
     	if input_state == False:
+            time.sleep(0.3)
             subprocess.Popen(['python', 'RegisterCard.py'])
-    		time.sleep(300)
     		sys.exit()
 		# Scan for cards
 		(status, TagType) = \
