@@ -42,9 +42,8 @@ print 'Por favor pase la tarjeta por el lector'
 while continue_reading:
     input_state = GPIO.input(3)
     if input_state == False:
-        time.sleep(0.3)
-        subprocess.Popen(['python', 'Read.py'])
         end_read
+        subprocess.Popen(['python', 'Read.py'])
         sys.exit()
     # Scan for cards
 
