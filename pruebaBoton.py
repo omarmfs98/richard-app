@@ -1,6 +1,4 @@
 import RPi.GPIO as GPIO
-import time
-import sys
 import subprocess
 
 GPIO.setmode(GPIO.BCM)
@@ -10,9 +8,11 @@ reading = True
 
 while True:
 	input_state = GPIO.input(24)
+	print "[MODO LECTURA]"
+	subprocess.Popen(['python', 'Read.py'])
 	if input_state == False:
 		reading = not reading
 	if reading:
-		process1 = subprocess.Popen(['python', 'Read.py'])
+		subprocess.Popen(['python', 'Read.py'])
 	else:
-		process1 = subprocess.Popen(['python', 'RegisterCard.py'])
+		subprocess.Popen(['python', 'RegisterCard.py'])
