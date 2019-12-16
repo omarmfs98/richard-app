@@ -34,6 +34,7 @@ MIFAREReader = MFRC522.MFRC522()
 
 # Welcome message
 
+print '[MODO LECTURA]'
 print 'Por favor pase la tarjeta por el lector'
 
 # This loop keeps checking for chips. If one is near it will get the UID and authenticate
@@ -133,7 +134,9 @@ while continue_reading:
 		                    print js['message']
 		            else:
 		                print "[ALERTA]: " + js['message']
+                        print "[MODO LECTURA]"
 		            print '\n' + '\n' + 'Por favor pase la tarjeta por el lector'
 		        else:
 		            print 'Authentication error'
+                    print "[MODO LECTURA]"
 		            print '\n' + '\n' + 'Por favor pase la tarjeta por el lector'
