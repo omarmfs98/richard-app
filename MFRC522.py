@@ -132,9 +132,8 @@ class MFRC522:
     GPIO.setmode(GPIO.BOARD)
     GPIO.setup(self.NRSTPD, GPIO.OUT)
     GPIO.setup(3, GPIO.IN)
-    GPIO.setwarnings(False)
     GPIO.output(self.NRSTPD, 1)
-    self.MFRC522_Init()
+    self.MFRC522_Init()    
 
   def MFRC522_Reset(self):
     self.Write_MFRC522(self.CommandReg, self.PCD_RESETPHASE)
