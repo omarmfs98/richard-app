@@ -40,7 +40,7 @@ print 'Por favor pase la tarjeta por el lector'
 
 while continue_reading:
     input_state = GPIO.input(24)
-	if input_state == False:
+    if input_state == False:
         READING = not READING
 
 	# Scan for cards
