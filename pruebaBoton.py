@@ -11,5 +11,5 @@ while True:
 	if input_state == False:
 		print 'Boton pulsado'
 		time.sleep(0.3)
-		process1 = subprocess.Popen(['python', 'Read.py'])	
+		process1 = subprocess.Popen(['python', 'Read.py'])
 		sys.exit()
