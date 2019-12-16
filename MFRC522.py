@@ -133,7 +133,7 @@ class MFRC522:
     GPIO.setup(self.NRSTPD, GPIO.OUT)
     GPIO.setup(3, GPIO.IN)
     GPIO.output(self.NRSTPD, 1)
-    self.MFRC522_Init()    
+    self.MFRC522_Init()
 
   def MFRC522_Reset(self):
     self.Write_MFRC522(self.CommandReg, self.PCD_RESETPHASE)
@@ -308,7 +308,7 @@ class MFRC522:
     (status, backData, backLen) = self.MFRC522_ToCard(self.PCD_TRANSCEIVE, buf)
 
     if (status == self.MI_OK) and (backLen == 0x18):
-      print("Size: " + str(backData[0]))
+      #print("Size: " + str(backData[0]))
       return    backData[0]
     else:
       return 0
@@ -361,7 +361,7 @@ class MFRC522:
       print("Error while reading!")
     i = 0
     if len(backData) == 16:
-      print("Sector "+str(blockAddr)+" "+str(backData))
+      #print("Sector "+str(blockAddr)+" "+str(backData))
 
   def MFRC522_Write(self, blockAddr, writeData):
     buff = []
