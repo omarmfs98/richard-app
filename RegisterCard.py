@@ -71,9 +71,7 @@ while continue_reading:
                                 data=dataEmployee,
                                 headers={'X-Requested-With': 'XMLHttpRequest'
                             })
-            js = json.loads(res.text)
-            print res.text
-
+            js = json.loads(res.text)            
             print "[ALERTA]: " + js['errors']['serial'][0]
             print '\n' + '\n' + 'Por favor pase la tarjeta por el lector'
         else:
