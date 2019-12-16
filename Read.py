@@ -8,9 +8,13 @@ import subprocess
 import requests
 import json
 import datetime
+import time
+import sys
 
 continue_reading = True
 
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(24, GPIO.IN, pull_up_down = GPIO.PUD_UP)
 
 # Capture SIGINT for cleanup when the script is aborted
 
@@ -35,7 +39,11 @@ print 'Por favor pase la tarjeta por el lector'
 # This loop keeps checking for chips. If one is near it will get the UID and authenticate
 
 while continue_reading:
-
+        input_state = GPIO.input(24)
+    	if input_state == False:
+            subprocess.Popen(['python', 'RegisterCard.py'])
+    		time.sleep(300)
+    		sys.exit()
 		# Scan for cards
 		(status, TagType) = \
 		MIFAREReader.MFRC522_Request(MIFAREReader.PICC_REQIDL)
