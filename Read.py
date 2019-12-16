@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 import RPi.GPIO as GPIO
 import MFRC522
@@ -8,8 +9,6 @@ import requests
 import json
 import datetime
 import sys
-reload(sys)
-sys.setdefaultencoding('utf8')
 
 
 continue_reading = True
