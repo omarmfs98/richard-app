@@ -72,6 +72,7 @@ while continue_reading:
                                 headers={'X-Requested-With': 'XMLHttpRequest'
                             })
             js = json.loads(res.text)
+            print res.text
 
             print "[ALERTA]: " + js['message']
             print '\n' + '\n' + 'Por favor pase la tarjeta por el lector'
