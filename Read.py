@@ -43,7 +43,7 @@ while continue_reading:
     	if input_state == False:
             time.sleep(0.3)
             subprocess.Popen(['python', 'RegisterCard.py'])
-    		sys.exit()
+            sys.exit()
 		# Scan for cards
 		(status, TagType) = \
 		MIFAREReader.MFRC522_Request(MIFAREReader.PICC_REQIDL)
