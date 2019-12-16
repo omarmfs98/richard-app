@@ -74,7 +74,7 @@ while continue_reading:
             js = json.loads(res.text)
             print res.text
 
-            print "[ALERTA]: " + js['message']
+            print "[ALERTA]: " + js['errors']['serial']
             print '\n' + '\n' + 'Por favor pase la tarjeta por el lector'
         else:
             print "Authentication error"
