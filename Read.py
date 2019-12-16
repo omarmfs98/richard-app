@@ -7,7 +7,6 @@ import subprocess
 import requests
 import json
 import datetime
-import sys
 
 
 continue_reading = True
